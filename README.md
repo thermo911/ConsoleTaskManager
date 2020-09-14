@@ -14,7 +14,7 @@ If command is correct `CommandHandler` calls corresponding method of object of c
 1. **`add <task text>`**: appending new task int `tasksToDo` list consists in `Manager` object. 
 Each new task has a unique id.
 2. **`delete <task id>`**: deletion the task with matching id from `tasksToDo` or `tasksDone` lists. 
-3. `complete <task id>`: moving the task with matching id from `tasksToDo` to `tasksDone` list 
+3. **`complete <task id>`**: moving the task with matching id from `tasksToDo` to `tasksDone` list 
 and set this task done.
 4. **`save <filename.txt>`**: creating a new file called _filename.txt_ (if needs) and write an info
 about current tasks in this file using special format (_id status text_).
