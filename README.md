@@ -1,7 +1,7 @@
-#Console Task Manager
+# Console Task Manager
 This project is a test task from ITMO uni. Java club.
 
-###Mechanism of work
+### Mechanism of work
 `main()` methon creates an object of `CommandHandler` with `new Manager()`
 as a parameter.
 
@@ -10,7 +10,7 @@ as a parameter.
 `CommandHandler` checks out whether user enters correct command by `parseCommand()` method.
 If command is correct `CommandHandler` calls corresponding method of object of class `Manager`.
 
-###Console commands review
+### Console commands review
 1. **`add <task text>`**: appending new task int `tasksToDo` list consists in `Manager` object. 
 Each new task has a unique id.
 2. **`delete <task id>`**: deletion the task with matching id from `tasksToDo` or `tasksDone` lists. 
@@ -25,4 +25,4 @@ about current tasks in this file using special format (_id status text_).
 
 Note: while calling **`save`** or **`load`** command user should enter only name
 of file in _*.txt_ format. All files consist in _files/_ directory. So there is some trouble in code
-because this directory must be in _src_ directory...
+because this directory must be in _src/_ directory...
