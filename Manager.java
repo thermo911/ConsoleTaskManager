@@ -24,6 +24,12 @@ public class Manager {
                     break;
                 }
             }
+            for(Task task: tasksDone) {
+                if(task.getId()==i) {
+                    correctId = false;
+                    break;
+                }
+            }
             if(correctId) {
                 tasksToDo.add(new Task(i, text));
                 return;
@@ -92,10 +98,8 @@ public class Manager {
 
     void deleteTask(int id) {
         boolean success = false;
-        Iterator<Task> it = tasksToDo.iterator();
 
-        while(it.hasNext()) {
-            Task task = it.next();
+        for(Task task: tasksToDo) {
             if(task.getId() == id) {
                 tasksToDo.remove(task);
                 success = true;
@@ -103,12 +107,9 @@ public class Manager {
             }
         }
 
-        it = tasksDone.iterator();
-
-        while(it.hasNext()) {
-            Task task = it.next();
+        for(Task task: tasksDone) {
             if(task.getId() == id) {
-                tasksDone.remove(task);
+                tasksToDo.remove(task);
                 success = true;
                 break;
             }
@@ -171,7 +172,6 @@ public class Manager {
 
     public void completeTask(int id) {
         boolean success = false;
-        Iterator<Task> it = tasksToDo.iterator();
 
         for(Task task: tasksToDo) {
             if(task.getId() == id) {
