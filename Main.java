@@ -8,7 +8,10 @@ public class Main {
 
         while (true) {
             System.out.print("command: ");
-            commandHandler.parseCommand(sc.nextLine());
+            if(commandHandler.parseCommand(sc.nextLine())) {
+                System.out.println("logout");
+                return;
+            }
         }
     }
 }

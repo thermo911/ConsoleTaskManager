@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Manager {
     private List<Task> tasksToDo;
@@ -38,29 +39,29 @@ public class Manager {
     }
 
     void loadFromFile(String fileName) {
-        char[] buffer = new char[1000];
         File file = new File("src/files/" + fileName);
-
-        fileReader = null;
 
         if(file.exists()) {
             tasksToDo.clear();
             tasksDone.clear();
 
-            try {
-                fileReader = new FileReader(file);
-                fileReader.read(buffer);
+            try (Scanner sc = new Scanner(file)) {
+                List<String> taskLines = new LinkedList<>();
 
-                String[] taskLines = String.copyValueOf(buffer).split("\n");
+                while(sc.hasNextLine()) {
+                    taskLines.add(sc.nextLine());
+                }
 
                 for(String taskLine: taskLines) {
                     String[] tokens = taskLine.split("\\s", 3);
                     int id = -1;
+
                     try {
                         id = Integer.parseInt(tokens[0]);
                     } catch (NumberFormatException e) {
                         continue;
                     }
+
                     Task task = new Task(id, tokens[2]);
 
                     if(tokens[1].equals("<done>")) {
@@ -70,18 +71,10 @@ public class Manager {
                         tasksToDo.add(task);
                     }
                 }
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    fileReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
+
         } else {
             System.out.println("File not found.");
         }
@@ -109,7 +102,7 @@ public class Manager {
 
         for(Task task: tasksDone) {
             if(task.getId() == id) {
-                tasksToDo.remove(task);
+                tasksDone.remove(task);
                 success = true;
                 break;
             }
@@ -127,13 +120,12 @@ public class Manager {
     }
 
     public void saveTasks(String filename) {
-        System.out.println("saveTasks()");
         File file = new File("src/files/" + filename);
 
         if(!file.exists()) {
             try {
                 file.createNewFile();
-                System.out.println("create file" + filename);
+                System.out.println("create file " + filename);
             } catch (IOException e) {
                 System.out.println("incorrect filename");
                 return;

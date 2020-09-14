@@ -5,7 +5,7 @@ public class CommandHandler {
         this.manager = manager;
     }
 
-    public void parseCommand(String str) {
+    public boolean parseCommand(String str) {
         String[] tokens = str.split("\\s", 2);
 
         if(tokens.length == 1) {
@@ -13,6 +13,8 @@ public class CommandHandler {
                 manager.printTasks();
             } else if(tokens[0].equalsIgnoreCase("completed")) {
                 manager.printCompleted();
+            } else if(tokens[0].equalsIgnoreCase("exit")) {
+                return true;
             } else {
                 System.out.println("Command not found");
             }
@@ -41,5 +43,6 @@ public class CommandHandler {
                 manager.completeTask(id);
             }
         }
+        return false;
     }
 }
